@@ -1,6 +1,6 @@
 // CLI inputs for logic and search term
-const userInput = process.argv[2];
-const userQuery = process.argv.slice(3).join(' ');
+// const userInput = process.argv[2];
+// const userQuery = process.argv.slice(3).join(' ');
 const inquirer = require('inquirer');
 
 
@@ -9,20 +9,19 @@ const inquirer = require('inquirer');
  * @return {Promise} an Inquirer promise that resolves with
  * an answers object
  */
-function getUserInputAsync() {
-  return inquirer.prompt([
-    {
-      name: 'type',
-      message: 'Would you like to Bid or Sell?',
-      type: 'list',
-      choices: ['Bid', 'Sell'],
-      default: 'Bid',
-    },
-  ]).then(userCommand);
-}
-// Logic for the correct API based on CLI
-function userCommand() {
-  switch (answers.type) {
+// function getUserInputAsync() {
+return inquirer.prompt([
+  {
+    name: 'type',
+    message: 'Would you like to Bid or Sell?',
+    type: 'list',
+    choices: ['Bid', 'Sell'],
+    default: 'Bid',
+  },
+]).then(function(inquirerResponse) {
+  console.log(inquirerResponse.type);
+  // getUserInputAsync(inquirerResponse.type);
+  switch (inquirerResponse.type) {
     case 'Sell':
       postThis();
       break;
@@ -31,17 +30,20 @@ function userCommand() {
       bidThis();
       break;
   }
-};
+}
 
 
-getUserInputAsync();
+);
+
+
+
 
 function postThis() {
-  console.log('post');
+  console.log('You chose post');
 }
 
 
 
 function bidThis() {
-  console.log('bid');
+  console.log('You chose bid');
 }
